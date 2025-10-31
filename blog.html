@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Alexander Reed | Articles</title>
+    <style>
+
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            line-height: 1.6;
+            /* Account for fixed header */
+            
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+
+        header {
+            background-color: #F8F9FA;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1C1C1C;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #6C63FF;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1C1C1C;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #6C63FF;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #6C63FF;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            padding: 0.7rem 1.8rem;
+            background-color: #6C63FF;
+            color: #F8F9FA;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(108, 99, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #4B47D2;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .cta-button::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background-color: #1C1C1C;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        @media (max-width: 968px) {
+            .header-container {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 73px;
+                flex-direction: column;
+                background-color: #F8F9FA;
+                width: 100%;
+                text-align: center;
+                transition: left 0.4s ease;
+                padding: 2rem 0;
+                gap: 0;
+                border-bottom: 1px solid #E0E0E0;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 1rem 0;
+                border-bottom: 1px solid #E0E0E0;
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+                padding-top: 1.5rem;
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 1rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.35rem;
+            }
+
+            .nav-menu {
+                top: 65px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+        .articles-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* Page Header */
+        .articles-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .articles-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            letter-spacing: -0.5px;
+        }
+
+        .articles-header p {
+            font-size: 1.2rem;
+            color: #CCCCCC;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Featured Article */
+        .featured-article {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(108, 99, 255, 0.05) 100%);
+            border: 2px solid #6C63FF;
+            border-radius: 16px;
+            padding: 60px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .featured-article:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(108, 99, 255, 0.3);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: #6C63FF;
+            color: #FFFFFF;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 0.9rem;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .featured-article:hover .featured-image {
+            transform: scale(1.05);
+        }
+
+        .featured-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: #FFFFFF;
+            line-height: 1.2;
+        }
+
+        .featured-date {
+            font-size: 0.95rem;
+            color: #6C63FF;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .featured-excerpt {
+            font-size: 1.15rem;
+            color: #CCCCCC;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .featured-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: #6C63FF;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .featured-cta:hover {
+            background: #5850E6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .featured-cta::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-cta:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Article Card */
+        .article-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-6px);
+            border-color: #6C63FF;
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.2);
+        }
+
+        .article-thumbnail {
+            width: 100%;
+            height: 240px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 0.85rem;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .article-card:hover .article-thumbnail {
+            transform: scale(1.08);
+        }
+
+        .article-content {
+            padding: 30px;
+        }
+
+        .article-date {
+            font-size: 0.85rem;
+            color: #6C63FF;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            color: #FFFFFF;
+            transition: color 0.3s ease;
+        }
+
+        .article-card:hover .article-content h3 {
+            color: #6C63FF;
+        }
+
+        .article-excerpt {
+            font-size: 1rem;
+            color: #CCCCCC;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6C63FF;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 14px;
+        }
+
+        .read-more::after {
+            content: '→';
+            font-size: 1.1rem;
+        }
+
+        /* WhatsApp Comment Section */
+        .comment-section {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, rgba(108, 99, 255, 0.03) 100%);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .comment-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .comment-section p {
+            font-size: 1.1rem;
+            color: #CCCCCC;
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 40px;
+            background: #25D366;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1EBE57;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 26px;
+            height: 26px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: 35px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .articles-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .featured-article {
+                grid-template-columns: 1fr;
+                padding: 40px;
+                gap: 35px;
+            }
+
+            .featured-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .featured-image {
+                height: 350px;
+            }
+
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .articles-container {
+                padding: 50px 16px;
+            }
+
+            .articles-header {
+                margin-bottom: 50px;
+            }
+
+            .articles-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .articles-header p {
+                font-size: 1rem;
+            }
+
+            .featured-article {
+                padding: 30px 20px;
+                margin-bottom: 60px;
+            }
+
+            .featured-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .featured-excerpt {
+                font-size: 1rem;
+            }
+
+            .featured-image {
+                height: 280px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 35px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .article-thumbnail {
+                height: 200px;
+            }
+
+            .article-content {
+                padding: 24px;
+            }
+
+            .article-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .comment-section {
+                padding: 40px 24px;
+                margin-top: 60px;
+            }
+
+            .comment-section h2 {
+                font-size: 2rem;
+            }
+
+            .comment-section p {
+                font-size: 1rem;
+            }
+
+            .whatsapp-btn {
+                padding: 16px 32px;
+                font-size: 1rem;
+            }
+        }
+
+
+
+         .footer {
+            background: linear-gradient(135deg, #1A1A1A 0%, #252525 100%);
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent);
+        }
+
+        .footer-main {
+            padding: 5rem 2rem 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            background-color: #6C63FF;
+            border-color: #6C63FF;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .footer-social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-column-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #6C63FF;
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #6C63FF;
+            transform: translateX(3px);
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact-icon {
+            width: 20px;
+            height: 20px;
+            color: #6C63FF;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer-contact-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-contact-text a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-text a:hover {
+            color: #6C63FF;
+        }
+
+        .footer-bottom {
+            padding: 2rem 2rem;
+        }
+
+        .footer-bottom-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-copyright {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-copyright a {
+            color: #6C63FF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-copyright a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-link {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal-link:hover {
+            color: #6C63FF;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #6C63FF;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #5850E6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(108, 99, 255, 0.6);
+        }
+
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .footer-brand {
+                grid-column: span 3;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-main {
+                padding: 4rem 1.5rem 2.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem 2rem;
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+
+            .footer-bottom-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer-main {
+                padding: 3.5rem 1rem 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-brand {
+                grid-column: span 1;
+            }
+
+            .footer-logo {
+                font-size: 1.5rem;
+            }
+
+            .footer-tagline {
+                font-size: 0.95rem;
+            }
+
+            .footer-column-title {
+                font-size: 0.85rem;
+            }
+
+            .footer-link,
+            .footer-contact-text {
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom {
+                padding: 1.5rem 1rem;
+            }
+
+            .footer-copyright,
+            .footer-legal-link {
+                font-size: 0.85rem;
+            }
+
+            .footer-legal {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-social {
+                flex-wrap: wrap;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+        <div class="header-container">
+            <a href="./index.html" class="logo">Alexander Reed</a>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./index.html#about">About</a></li>
+                    <li><a href="./shop.html">Books</a></li>
+                    <li><a href="./blog.html">Articles</a></li>
+                    <li><a href="index.html#contactSection" class="cta-button">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+<div class="articles-container">
+        <!-- Page Header -->
+        <div class="articles-header">
+            <h1>Articles & Reflections</h1>
+            <p>Explorations of life, literature, and the spaces between words. A collection of thoughts, stories, and observations from the author's journey.</p>
+        </div>
+
+        <!-- Featured Article -->
+        <article class="featured-article">
+            <div class="featured-image">
+                <img src="./assets/img/quiet dawn.jpg">
+            </div>
+            <div class="featured-content">
+                <span class="featured-badge">Featured</span>
+                <h2>The Quiet Dawn</h2>
+                <p class="featured-date">January 12, 2025</p>
+                <p class="featured-excerpt">Exploring the calm moments before life awakens. In these early hours, when the world holds its breath between night and day, we discover truths that daylight often obscures. A meditation on stillness, presence, and the beauty of beginnings.</p>
+                <a href="#" class="featured-cta">
+                    <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                    Read Full Article
+                </a>
+            </div>
+        </article>
+
+        <!-- All Articles Section -->
+        <h2 class="section-title">Recent Articles</h2>
+
+        <div class="articles-grid">
+            <!-- Article 1: The Quiet Dawn -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/night.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Jan 12, 2025</p>
+                    <h3>Before Day</h3>
+                    <p class="article-excerpt">Exploring the calm moments before life awakens.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 2: Threads of Memory -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/Threads of Memories.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Feb 8, 2025</p>
+                    <h3>Threads of Memory</h3>
+                    <p class="article-excerpt">A reflection on the moments that define us.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 3: Wandering Hearts -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/wondering heart.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Mar 3, 2025</p>
+                    <h3>Wandering Hearts</h3>
+                    <p class="article-excerpt">Stories of love, loss, and rediscovery.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 4: Ink and Shadows -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                   <img src="./assets/img/inks and shadows.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Mar 20, 2025</p>
+                    <h3>Ink and Shadows</h3>
+                    <p class="article-excerpt">A dive into the darker corners of imagination.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 5: Luminous Paths -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/❤silent horizon.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Apr 5, 2025</p>
+                    <h3>Luminous Paths</h3>
+                    <p class="article-excerpt">Finding light in unexpected places.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 6: The Silent Horizon -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                   <img src="./assets/img/The Silent Horizon.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Apr 28, 2025</p>
+                    <h3>The Silent Horizon</h3>
+                    <p class="article-excerpt">Journeys both outward and within.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 7: Letters Unsent -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/letter unsent.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">May 10, 2025</p>
+                    <h3>Letters Unsent</h3>
+                    <p class="article-excerpt">Poetic reflections on words left unsaid.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 8: Fragments of a Life -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                   <img src="./assets/img/fragant of life.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">May 22, 2025</p>
+                    <h3>Fragments of a Life</h3>
+                    <p class="article-excerpt">Short stories capturing fleeting moments.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 9: Whispers in the Wind -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                   <img src="./assets/img/wishpers in the wind.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Jun 6, 2025</p>
+                    <h3>Whispers in the Wind</h3>
+                    <p class="article-excerpt">Observations of life, love, and nature.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 10: Beyond the Pages -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                   <img src="./assets/img/beyond the pages.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Jun 18, 2025</p>
+                    <h3>Beyond the Pages</h3>
+                    <p class="article-excerpt">Insights and thoughts from the author's mind.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 11: Shades of Solitude -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/shades of solitude.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Jul 1, 2025</p>
+                    <h3>Shades of Solitude</h3>
+                    <p class="article-excerpt">Finding peace in quiet reflection.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 12: The Last Word -->
+            <article class="article-card">
+                <div class="article-thumbnail">
+                    <img src="./assets/img/the last word.jpg">
+                </div>
+                <div class="article-content">
+                    <p class="article-date">Jul 14, 2025</p>
+                    <h3>The Last Word</h3>
+                    <p class="article-excerpt">Final thoughts on storytelling and connection.</p>
+                    <a href="#" class="read-more">
+                        <!-- REPLACE WITH ACTUAL ARTICLE URL -->
+                        Read More
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- WhatsApp Comment Section -->
+        <section class="comment-section">
+            <h2>Share Your Thoughts</h2>
+            <p>Every article sparks a conversation. What resonated with you? Which piece moved you? Share your reflections, questions, or simply say hello. I'd love to hear from you.</p>
+            <a href="https://wa.me/2348134260378?text=Hi%20Alexander,%20I%20just%20read%20your%20article%20and%20wanted%20to%20share%20my%20thoughts..." class="whatsapp-btn" target="_blank">
+                <!-- REPLACE PHONE NUMBER: Change 2348123456789 to author's actual WhatsApp number -->
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Message on WhatsApp
+            </a>
+        </section>
+    </div>
+
+
+
+
+
+
+
+
+     <footer class="footer">
+        <div class="footer-main">
+            <div class="footer-container">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <h2 class="footer-logo">Alexander Reed</h2>
+                    <p class="footer-tagline">
+                        A storyteller crafting narratives that bridge imagination and emotion. Every word is an invitation to explore the depths of human experience.
+                    </p>
+                    <!-- UPDATE SOCIAL MEDIA LINKS BELOW -->
+                    <div class="footer-social">
+                        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://goodreads.com/yourusername" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Goodreads">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.5 13.2c0 2.4-1.8 4.2-4.5 4.2-2.7 0-4.5-1.8-4.5-4.2V9.6C7.5 7.2 9.3 5.4 12 5.4c2.7 0 4.5 1.8 4.5 4.2v3.6zm-1.5 0V9.6c0-1.5-.9-2.7-3-2.7s-3 1.2-3 2.7v3.6c0 1.5.9 2.7 3 2.7s3-1.2 3-2.7z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Quick Links</h3>
+                    <nav class="footer-links">
+                        <!-- UPDATE NAVIGATION LINKS BELOW -->
+                        <a href="./index.html" class="footer-link">Home</a>
+                        <a href="./shop.html" class="footer-link">Books</a>
+                        <a href="./index.html#aboutSection" class="footer-link">About</a>
+                        <a href="index.html#contactSection" class="footer-link">Contact</a>
+                    </nav>
+                </div>
+
+                <!-- Resources Column -->
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Resources</h3>
+                    <nav class="footer-links">
+                        <!-- UPDATE RESOURCE LINKS BELOW -->
+                        <a href="./blog.html" class="footer-link">Articles</a>
+                        <a href="index.html#booksSection" class="footer-link">Collections</a>
+                        <a href="index.html#faq" class="footer-link">FAQ</a>
+                        <a href="index.html#testimonialsSection" class="footer-link">Reviews</a>
+                    </nav>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-column">
+                    <h3 class="footer-column-title">Get In Touch</h3>
+                    <div class="footer-contact-item">
+                        <svg class="footer-contact-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <p class="footer-contact-text">
+                            <!-- UPDATE EMAIL ADDRESS BELOW -->
+                            <a href="mailto:christopherolawale31@gmail.com">christopherolawale31@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg class="footer-contact-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <p class="footer-contact-text">
+                            <!-- UPDATE LOCATION BELOW -->
+                            Based in New York, NY
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="footer-copyright">
+                    &copy; 2024 <a href="#contactSection">Alexander Reed</a>. All rights reserved.
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+
+
+
+
+
+
+
+
+
+
+    <script >
+const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const header = document.getElementById('header');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+
+            // Show/hide back to top button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            // Smooth scroll to top when button is clicked
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth scroll for footer navigation links
+            const footerLinks = document.querySelectorAll('.footer-link[href^="#"]');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+
+
+
+
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll for article cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all article cards
+        document.querySelectorAll('.article-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Animate featured article on load
+        window.addEventListener('load', function() {
+            const featured = document.querySelector('.featured-article');
+            if (featured) {
+                featured.style.opacity = '0';
+                featured.style.transform = 'translateY(30px)';
+                featured.style.transition = 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s';
+                
+                setTimeout(() => {
+                    featured.style.opacity = '1';
+                    featured.style.transform = 'translateY(0)';
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
